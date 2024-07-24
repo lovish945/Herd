@@ -1,0 +1,293 @@
+<html>
+
+<head>
+  <title>document</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script>
+      function doPrev(fileCtrl,imgPrev)
+      {
+        let [file] = fileCtrl.files
+        if(file){
+          imgPrev.src = URL.createObjectURL(file);
+        }
+      }
+    </script>
+    <script>
+      $(document).ready(function(){
+        $("#txtEmail").blur(function(){
+                var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+                let email = $(this).val();
+                
+                if(pattern.test(email)==true)
+                alert("Valid");
+            else
+            alert("Invalid");
+            })
+        let active=localStorage.getItem("activeuser");
+            $("#txtEmail").val(active).prop("readonly",true);
+
+       
+        $("#btnSearch").click(function(){
+        
+          let obj={
+            type:"get",
+            url:"/search-details",
+            data:{
+              txtEmail:$("#txtEmail").val()
+            }
+          }
+          $.ajax(obj).done(function(jsonAry){
+            if(jsonAry.length==0)
+          {
+            alert("Invalid Id");
+            return;
+          }
+          alert(JSON.stringify(jsonAry));
+          $("#txtPwd").val(jsonAry[0].pwd);
+          $("#prev").prop("src","uploads/"+jsonAry[0].picpath);
+           $("#hdn").val(jsonAry[0].picpath);
+          $("#fname").val(jsonAry[0].fname);
+          $("#lname").val(jsonAry[0].lname);
+          $("#insta").val(jsonAry[0].iname);
+          $("#select").val(jsonAry[0].fields.split(","));
+          $("#txtaddress").val(jsonAry[0].address);
+          $("#city").val(jsonAry[0].city);
+          $("#combo").val(jsonAry[0].state);
+          $("#txtdob").val(jsonAry[0].dob);
+          $("#gender").val(jsonAry[0].gender);
+          $("#txtyoutube").val(jsonAry[0].youtube);
+          $("#txtfacebook").val(jsonAry[0].facebook);
+          $("#TextArea").val(jsonAry[0].other);
+          }).fail(function(err)
+        {
+          alert(err.statusText);
+        })
+        })
+      })
+    </script>
+
+  <style>
+    .form-label {
+      color: #d1105a;
+
+    }
+    
+  </style>
+</head>
+
+<body style="background-color: #9ac6c5;">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid" style="background-color: #302f40;">
+      <a class="navbar-brand" href="#">
+        <img src="pics/logo2.png" alt="" style="width: 55px; height: 55px; border-radius: 10px; border: #302f40;">
+      </a>
+      <h3 style="color: #c850c8;">HERD</h3>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <center>
+      <button type="button" class="btn btn-outline-success" id="btnLog" name="btnLog" onclick="doLogOut(); " style="background-color: #c850c8; color: #302f40;border: #302f40;">Log Out</button>
+    </center>
+    </div>
+  </nav>
+ 
+  <div class="container" style="margin-top: 100px;">
+    <div class="row">
+      <div class="col-md-12">
+        <center>
+          <h3 >
+            Profile Form
+          </h3>
+        </center>
+      </div>
+    </div>
+
+    <form class="row g-3" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="hdn" id="hdn">
+      <p style="color: #d1105a;">
+        Profile Pic <input type="file" name="ppic" onchange="doPrev(this,prev); ">
+        <br>
+        <img src="" alt="" id="prev" width="100" height="100">
+      </p>
+
+      <div class="col-md-4">
+        <label for="validationServer01" class="form-label">First name</label>
+        <input type="text" class="form-control is-valid"  name="fname" id="fname" required>
+      
+      </div>
+      <div class="col-md-4">
+        <label for="validationServer02" class="form-label">Last name</label>
+        <input type="text" class="form-control is-valid"  name="lname" id="lname" required>
+        
+      </div>
+      
+      <div class="col-md-4">
+        <label for="validationServerUsername" class="form-label">Instagram URL</label>
+        <div class="input-group has-validation">
+          <span class="input-group-text" id="inputGroupPrepend3">@</span>
+          <input type="text" class="form-control is-invalid" id="insta" name="insta" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+            Please choose a username.
+          </div>
+        </div>
+      </div>
+      <div class="row g-2">
+        <div class="col-md">
+          <div class="form-floating">
+            <input type="email" class="form-control" id="txtEmail" name="txtEmail" placeholder="name@example.com" >
+            <label for="floatingInputGrid">Email address</label>
+            <button type="button" id="btnSearch" class="btn btn-primary" style="width: 80px;height: 40px;margin-top: 40px; background-color: #302f40; color: #c850c8; border: #302f40;">Search</button>
+            <br> <span id="errEmail">*</span>
+          </div>
+        </div>
+        <div class="form-floating">
+          <input type="password" class="form-control" id="txtPwd" name="txtPwd" placeholder="Password">
+          <label for="floatingPassword">Password</label>
+        </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <select class="form-select" id="select" name="select"multiple aria-label="Multiple select example"size="5" aria-label="Size 5 select example">
+
+              <option selected>Open this select menu</option>
+              <option value="Acting">Acting</option>
+              <option value="Dance">Dance</option>
+              <option value="Music">Music</option>
+              <option value="Travel">Travel</option>
+              <option value="Health and Fitness">Health and Fitness</option>
+              <option value="Food">Food</option>
+              <option value="Technology">Technology</option>
+              <option value="Lifestyle">Lifestyle</option>
+              <option value="Gaming">Gaming</option>
+              <option value="Parenting">Parenting</option>
+              <option value="Finance">Finance</option>
+              <option value="Education">Education</option>
+            </select>
+            <label for="inputfields">Fields</label>
+              </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="txtaddress" name="txtaddress" placeholder="1234 Main St">
+      </div>
+      
+      <div class="col-md-6">
+        <label for="validationServer03" class="form-label">City</label>
+        <input type="text" class="form-control is-invalid" id="city" name="city" aria-describedby="validationServer03Feedback" required>
+        <div id="validationServer03Feedback" class="invalid-feedback">
+          Please provide a valid city.
+        </div>
+      </div>
+      <div class="col-md-3">
+        <label for="combo" class="form-label">State</label>
+        <input class="form-select is-invalid" list="combos" id="combo" name="combo" aria-describedby="validationServer04Feedback" required>
+        <datalist id="combos">  
+          <option selected disabled value="">Choose...</option>
+          <option>Sikkhim</option>
+          <option>Jharkhand</option>
+          <option>Kerala</option>
+          <option>Delhi</option>
+          <option>Jammu and Kashmir</option>
+          <option>Uttarakhand</option>
+          <option>Uttar Pradesh</option>
+          <option>Tamil Nadu</option>
+          <option>Himachal Pradesh</option>
+          <option>Meghalaya</option>
+          <option>Odisha</option>
+          <option>Arunachal Pradesh</option>
+          <option>Nagaland</option>
+          <option>Gujurat</option>
+          <option>Madhya Pradesh</option>
+          <option>Haryana</option>
+          <option>Telengana</option>
+          <option>Assam</option>
+          <option>Rajasthan</option>
+          <option>Manipur</option>
+          <option>West Bengal</option>
+          <option>Karnatka</option>
+          <option>Tripura</option>
+          <option>Andra Pradesh</option>
+          <option>Punjab</option>
+          <option>Mizoram</option>
+          <option>Goa</option>
+          <option>Bihar</option>
+          <option>Chattisgarh</option>
+          <option>Maharashtra</option>
+        </datalist>  
+
+        </select>
+        <div id="validationServer04Feedback" class="invalid-feedback">
+          Please select a valid state.
+        </div>
+      </div>
+      
+      <div class="col-md-3">
+        <label for="validationServer05" class="form-label">Date of Birth</label>
+        <input type="date" class="form-control is-invalid" id="txtdob" name="txtdob" aria-describedby="validationServer05Feedback" required>
+        
+      </div>
+      <div class="col-md-3">
+        <label for="validationServer05" class="form-label">Gender</label>
+        <select class="form-select" aria-label="Default select example" id="gender" name="gender">
+          <option selected>Choose</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+          <option value="Other">Other</option>
+        </select>
+        
+      </div>
+      <div class="col-md-4">
+        <label for="validationServerUsername" class="form-label" >Youtube</label>
+        <div class="input-group has-validation">
+          
+          <input type="text" class="form-control is-invalid" id="txtyoutube" name="txtyoutube" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <label for="validationServerUsername" class="form-label">FaceBook</label>
+        <div class="input-group has-validation">
+          
+          <input type="text" class="form-control is-invalid" id="txtfacebook" name="txtfacebook" aria-describedby="inputGroupPrepend3 validationServerUsernameFeedback" required>
+          <div id="validationServerUsernameFeedback" class="invalid-feedback">
+          </div>
+        </div>
+      </div>
+      
+      <div class="mb-3">
+        <label for="validationTextarea" class="form-label">Other Info</label>
+        <textarea class="form-control" id="TextArea" name="TextArea"  required></textarea>
+        <div class="invalid-feedback">
+          Please enter a message in the textarea.
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input is-invalid" type="checkbox" value="" id="checkbox" name="checkbox" aria-describedby="invalidCheck3Feedback" required>
+          <label class="form-check-label" for="invalidCheck3">
+            Agree to terms and conditions
+          </label>
+          <div id="invalidCheck3Feedback" class="invalid-feedback">
+            You must agree before submitting.
+          </div>
+        </div>
+      </div>
+    
+      <div class="col-12">
+        <button class="btn btn-primary" type="submit" formaction="/users-save-process" style="background-color: #302f40; color: #c850c8; border: #302f40;">Save</button>
+        <button class="btn btn-primary" type="submit" formaction="/users-update" style="background-color: #302f40; color: #c850c8; border: #302f40;">Update</button>
+    
+      </div>
+    </form>
+  </div>
+</body>
+
+</html>

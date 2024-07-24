@@ -1,0 +1,194 @@
+<html>
+    <head>
+        <title>Document</title>
+    </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+    
+    
+    <script>
+      $(document).ready(function(){
+       
+        $("#txtEmail").blur(function(){
+                var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
+                let email = $(this).val();
+                
+                if(pattern.test(email)==true)
+                alert("Valid");
+            else
+            alert("Invalid");
+            })
+        
+      })
+    </script>
+    <script>
+      $(document).ready(function(){
+        let active=localStorage.getItem("activeuser");
+        $("#txtemail").val(active).prop("readonly",true);
+        $("#btnSearchClient").click(function()
+      {
+        let obj={
+          type:"get",
+          url:"/search-client",
+          data:{
+            txtEmail:$("#txtEmail").val()
+          }
+        }
+        $.ajax(obj).done(function(jsonAry)
+        {
+          if(jsonAry.length==0){
+            alert("Invalid ID");
+            return;
+          }
+          alert(JSON.stringify(jsonAry));
+          $("#state").val(jsonAry[0].state);
+          $("#txtname").val(jsonAry[0].name);
+          $("#city").val(jsonAry[0].city);
+          $("#org").val(jsonAry[0].org);
+          $("#mobile").val(jsonAry[0].mobile);
+        }).fail(function(err){
+          alert(err.statusText);
+        })
+      })
+      })
+    </script>
+    
+    <body style="background-color: #081c15;">
+        
+      <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+        <div class="container-fluid" style="background-color: #302f40;">
+          <a class="navbar-brand" href="#">
+            <img src="pics/logo2.png" alt="" style="width: 55px; height: 55px; border-radius: 10px; border: #302f40;">
+          </a>
+          <h3 style="color: #c850c8;">HERD</h3>
+    
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        <center>
+          <button type="button" class="btn btn-outline-success" id="btnLog" name="btnLog" onclick="doLogOut(); " style="background-color: #c850c8; color: #302f40;border: #302f40;">Log Out</button>
+        </center>
+        </div>
+      </nav>
+          <div class="container" style="margin-top: 100px; color:#d8f3dc ;">
+          <div class="row">
+            <div class="col-md-12">
+              <center>
+                <h3 class="text" style="color: #d8f3dc;">
+                   Client Profile Form
+                </h3>
+              </center>
+            </div>
+          </div>
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <input type="email" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp">
+              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              <button type="button" class="btn btn-primary" style="width: 80px;height: 40px;margin-top: 30px; background-color: #302f40; color: #c850c8; border: #302f40;" id="btnSearchClient" name="btnSearchClient" >Search</button>
+            </div>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  
+                    <label for="validationServer01" class="form-label">Name</label>
+                    <input type="text" class="form-control is-valid"  name="txtname" id="txtname" required>
+                  
+                  
+                </div>
+                <div class="col">
+                
+                    <label for="validationServer03" class="form-label">City</label>
+                    <input type="text" class="form-control is-invalid" id="city" name="city" aria-describedby="validationServer03Feedback" required>
+                    <div id="validationServer03Feedback" class="invalid-feedback" style="color: #d8f3dc;">
+                      Please provide a valid city.
+                  </div>
+                </div>
+                <div class="col">
+                  <label for="validationServer04" class="form-label">State</label>
+                  <select class="form-select is-invalid" id="state" name="state" aria-describedby="validationServer04Feedback" required>
+                            
+                    <option selected disabled value="">Choose...</option>
+                    <option>Sikkhim</option>
+                    <option>Jharkhand</option>
+                    <option>Kerala</option>
+                    <option>Delhi</option>
+                    <option>Jammu and Kashmir</option>
+                    <option>Uttarakhand</option>
+                    <option>Uttar Pradesh</option>
+                    <option>Tamil Nadu</option>
+                    <option>Himachal Pradesh</option>
+                    <option>Meghalaya</option>
+                    <option>Odisha</option>
+                    <option>Arunachal Pradesh</option>
+                    <option>Nagaland</option>
+                    <option>Gujurat</option>
+                    <option>Madhya Pradesh</option>
+                    <option>Haryana</option>
+                    <option>Telengana</option>
+                    <option>Assam</option>
+                    <option>Rajasthan</option>
+                    <option>Manipur</option>
+                    <option>West Bengal</option>
+                    <option>Karnatka</option>
+                    <option>Tripura</option>
+                    <option>Andra Pradesh</option>
+                    <option>Punjab</option>
+                    <option>Mizoram</option>
+                    <option>Goa</option>
+                    <option>Bihar</option>
+                    <option>Chattisgarh</option>
+                    <option>Maharashtra</option>
+                 
+          
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="container text-center">
+              <div class="row">
+                <div class="col">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Individual/Organisation</label>
+                    <input type="text" class="form-control" id="org" name="org" aria-describedby="emailHelp">
+                   </div> 
+                </div>
+                <div class="col">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Contact No.</label>
+                    <input type="text" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp">
+                   </div> 
+                </div>
+              </div>
+              <div class="col-12">
+              <div class="form-check">
+                <input class="form-check-input is-invalid" type="checkbox" value="" id="checkbox" name="checkbox" aria-describedby="invalidCheck3Feedback" required>
+                <label class="form-check-label" for="invalidCheck3" style="color: #d8f3dc;">
+                  Agree to terms and conditions
+                </label>
+                <div id="invalidCheck3Feedback" class="invalid-feedback" style="color: #d8f3dc;">
+                  You must agree before submitting.
+                </div>
+              </div>
+            </div>
+            <br>
+            <br>
+              <div class="col-12">
+                <button class="btn btn-primary" type="submit" formaction="/client-save-process" style="background-color: #302f40; color: #c850c8; border: #302f40;">Save</button>
+                <button class="btn btn-primary" type="submit" formaction="/client-update" style="background-color: #302f40; color: #c850c8; border: #302f40;">Modify</button>
+            
+              </div>
+          </form>
+        </div>
+    </body>
+</html>
