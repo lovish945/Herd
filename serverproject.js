@@ -3,6 +3,7 @@ var mysql2 = require("mysql2");
 var fileuploader = require("express-fileupload");
 const http=require("http");
 const nodemailer = require("nodemailer");
+var cloudinary = require("cloudinary").v2;
 const { resolve } = require("path");
 let app = express();
 app.listen(2001,function(req,resp){
@@ -19,15 +20,22 @@ app.use(fileuploader());
 //     dateStrings:true
 // }
 
-let config = {
-    host : "b07oscxxxjpuv0m0rqyw-mysql.services.clever-cloud.com",
-    user :"uk6xuqt3rs1gdapb",
-    password :"k3P229OmaOeUbfCdHTHd",
-    database : "b07oscxxxjpuv0m0rqyw",
-    dateStrings:true,
-    keepAliveInitialDelay : 10000,
-    enabledKeepAlive : true,
-}
+// let config = {
+//     host : "b07oscxxxjpuv0m0rqyw-mysql.services.clever-cloud.com",
+//     user :"uk6xuqt3rs1gdapb",
+//     password :"k3P229OmaOeUbfCdHTHd",
+//     database : "b07oscxxxjpuv0m0rqyw",
+//     dateStrings:true,
+//     keepAliveInitialDelay : 10000,
+//     enabledKeepAlive : true,
+// }
+cloudinary.config({ 
+    cloud_name: 'dkxtd1xta', 
+    api_key: '325386151966969', 
+    api_secret: '2Gk5T0eZCzrXIuoZb9Rexw1Ka5Y' // Click 'View Credentials' below to copy your API secret
+});
+  
+let config = "mysql://avnadmin:AVNS__I576EyDe8P8isTsXf1@mysql-13e0121b-lovishbansal2005-4aad.e.aivencloud.com:12544/defaultdb"
  
 var mysql = mysql2.createConnection(config);
 mysql.connect(function(err){
@@ -127,13 +135,19 @@ app.get("/client-profile", function(req, resp) {
     console.log("page connected");
 })
 
-app.post("/users-save-process",function(req,resp){
+app.post("/users-save-process",async function(req,resp){
     let fileName ="";
     if(req.files!=null)
     {
         fileName = req.files.ppic.name;
         let path = __dirname + "/public/uploads/" + fileName;
-        req.files.ppic.mv(path);
+         req.files.ppic.mv(path);
+
+       await cloudinary.uploader.upload(path)
+        .then(function(result){
+
+            fileName = result.url;
+        })
     }
     else
     fileName="nopic.jpg";

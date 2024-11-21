@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node serverproject.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -10,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "cloudinary": "^2.3.1",
     "express": "^4.19.2",
     "express-fileupload": "^1.5.0",
     "http": "^0.0.1-security",

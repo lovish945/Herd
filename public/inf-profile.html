@@ -49,7 +49,7 @@
           }
           alert(JSON.stringify(jsonAry));
           $("#txtPwd").val(jsonAry[0].pwd);
-          $("#prev").prop("src","uploads/"+jsonAry[0].picpath);
+          $("#prev").prop("src",jsonAry[0].picpath);
            $("#hdn").val(jsonAry[0].picpath);
           $("#fname").val(jsonAry[0].fname);
           $("#lname").val(jsonAry[0].lname);
@@ -58,7 +58,8 @@
           $("#txtaddress").val(jsonAry[0].address);
           $("#city").val(jsonAry[0].city);
           $("#combo").val(jsonAry[0].state);
-          $("#txtdob").val(jsonAry[0].dob);
+          $("#txtdob").val(jsonAry[0].dob.split("T")[0]);
+         // alert(jsonAry[0].dob);
           $("#gender").val(jsonAry[0].gender);
           $("#txtyoutube").val(jsonAry[0].youtube);
           $("#txtfacebook").val(jsonAry[0].facebook);
