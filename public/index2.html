@@ -18,30 +18,31 @@
     }
   </style>
   <script>
-    $(document).ready(function(){
-      $("#txtEmail").blur(function(){
-                var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-                let email = $(this).val();
-                
-                if(pattern.test(email)==true)
-                alert("Valid");
-            else
-            alert("Invalid");
-            })
-            $("#txtEmaill").blur(function(){
-                var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/; 
-                let email = $(this).val();
-                
-                if(pattern.test(email)==true)
-                alert("Valid");
-            else
-            alert("Invalid");
-            })
+    $(document).ready(function () {
+      $("#txtEmail").blur(function () {
+        var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        let email = $(this).val();
+
+        if (pattern.test(email) == true)
+          alert("Valid");
+        else
+          alert("Invalid");
+      })
+      $("#txtEmaill").blur(function () {
+        var pattern = /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+        let email = $(this).val();
+
+        if (pattern.test(email) == true)
+          alert("Valid");
+        else
+          alert("Invalid");
+      })
 
     // })
-  // </script>
-  // <script>
-    // $(document).ready(function () {
+    // </script>
+  //
+  <script>
+      // $(document).ready(function () {
       $("#btn-signup").click(function () {
 
         let obj = {
@@ -71,48 +72,47 @@
         }
         $.ajax(obj2).done(function (resp) {
           alert("Logined Sucessfully");
-          if(resp === "Influencer")
-        {
-          location.href = "infu-dash.html";
+          if (resp === "Influencer") {
+            location.href = "infu-dash.html";
 
-          localStorage.setItem("activeuser",$("#txtEmaill").val());
-        }
-        else if(resp === "Client")
-        {
-          location.href = "client-dash.html";
-          localStorage.setItem("activeuser",$("#txtEmaill").val());
-        }
-        else
-        alert(resp);
+            localStorage.setItem("activeuser", $("#txtEmaill").val());
+          }
+          else if (resp === "Client") {
+            location.href = "client-dash.html";
+            localStorage.setItem("activeuser", $("#txtEmaill").val());
+          }
+          else
+            alert(resp);
         }).fail(function (err) {
           alert(err.statusText);
         })
       })
 
-      $("#btn-submit").click(function(){
-                let obj3={
-                    type:"get",
-                    url:"/forgot-pwd",
-                    data:{
-                        mail:$("#mail").val(),
-                    }
-                }
-                $.ajax(obj3).done(function(resp){
-                    alert("Success");
-                }).fail(function(err){
-                    alert(err.statusText);
-                })
-            })
+      $("#btn-submit").click(function () {
+        let obj3 = {
+          type: "get",
+          url: "/forgot-pwd",
+          data: {
+            mail: $("#mail").val(),
+          }
+        }
+        $.ajax(obj3).done(function (resp) {
+          alert("Success");
+        }).fail(function (err) {
+          alert(err.statusText);
+        })
+      })
     });
-      
+
   </script>
 </head>
 
 <body style="background-color: #f6efee">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top" >
-      <div class="container-fluid" style="background-color: #302f40;">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+    <div class="container-fluid" style="background-color: #302f40;">
       <a class="navbar-brand" href="#">
-        <img src="pics/logo2.png" alt="" style="width: 55px; height: 55px; border-radius: 10px;border: #e365c1 solid 1px;">
+        <img src="pics/logo2.png" alt=""
+          style="width: 55px; height: 55px; border-radius: 10px;border: #e365c1 solid 1px;">
       </a>
       <h3 style="color: #c850c8;">HERD</h3>
 
@@ -121,247 +121,276 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <center>
-        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-          data-bs-target="#signupModal" style="background-color: white; color: #302f40; border: #302f40;">SignUp</button>
-        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
-          data-bs-target="#modalLogin" style="background-color: white; color: #302f40; border: #302f40;">Login</button>
-          <a href="#services"><button type="button" class="btn btn-outline-success" style="background-color: white; color: #302f40; border: #302f40;">Our Services </button> </a>
-        <a href="#team"><button type="button" class="btn btn-outline-info" style="background-color: white; color: #302f40; border: #302f40;">Our Team</button></a>
-        <a href="#reach"><button type="button" class="btn btn-outline-warning" style="background-color: white; color: #302f40; border: #302f40;">Reach Us</button></a>
-     
+        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#signupModal"
+          style="background-color: white; color: #302f40; border: #302f40;">SignUp</button>
+        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#modalLogin"
+          style="background-color: white; color: #302f40; border: #302f40;">Login</button>
+        <a href="#services"><button type="button" class="btn btn-outline-success"
+            style="background-color: white; color: #302f40; border: #302f40;">Our Services </button> </a>
+        <a href="#team"><button type="button" class="btn btn-outline-info"
+            style="background-color: white; color: #302f40; border: #302f40;">Our Team</button></a>
+        <a href="#reach"><button type="button" class="btn btn-outline-warning"
+            style="background-color: white; color: #302f40; border: #302f40;">Reach Us</button></a>
+
       </center>
     </div>
   </nav>
-    <!--***********************************************************************-->
+  <!--***********************************************************************-->
 
 
-    <div id="carouselExampleCaptions" class="carousel slide"data-bs-ride="carousel" style="margin-top: 50px;">
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" data-bs-interval="2000">
-          <img src="pics/collab.png" class="d-block w-100" alt="..." style="width: 70%; height: 70%;">
-          
-        </div>
-        <div class="carousel-item"data-bs-interval="2000">
-          <img src="pics/InfluencerCollab-01.png" class="d-block w-100" alt="..." style="width: 70%; height: 70%;">
-          
-        </div>
-        <div class="carousel-item"data-bs-interval="2000">
-          <img src="pics/influencer-marketing.png" class="d-block w-100" alt="..."style="width: 50%, height: 50%;">
-          
-        </div>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="margin-top: 50px;">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+        aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+        aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+        aria-label="Slide 3"></button>
     </div>
-<!--********************************************************-->
-<center>
-  <h2 id="services" style="color: #302f40; background-color:#cce8cc; margin-top: 10px;">Our Services </h2>
-</center>
-<div class="container text-center">
-  
-  <div class="row">
-    <div class="col">
-      <div class="card" style="width: 18rem; background-color: #e396df;">
-        <img src="pics/collaborations.png" class="card-img-top" alt="..." >
-        <div class="card-body">
-          <h5 class="card-title" style="color: #302f40;">Collaborations</h5>
-          <p class="card-text" style="color: #302f40;">
-            Our collaborations with influencers are more than just partnerships; they are a fusion of creativity, passion, and innovation. By teaming up with top influencers, we bring our brand's story to life in the most engaging and relatable ways.</p>
-            <a href="#" class="btn btn-primary" style="background-color:whitesmoke;color:#c850c8;border: #c850c8;">Go somewhere</a>
-        </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" data-bs-interval="2000">
+        <img src="pics/collab.png" class="d-block w-100" alt="..." style="width: 70%; height: 70%;">
+
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="pics/InfluencerCollab-01.png" class="d-block w-100" alt="..." style="width: 70%; height: 70%;">
+
+      </div>
+      <div class="carousel-item" data-bs-interval="2000">
+        <img src="pics/influencer-marketing.png" class="d-block w-100" alt="..." style="width: 50%, height: 50%;">
+
       </div>
     </div>
-    <div class="col">
-      <div class="card" style="width: 18rem;background-color: #e5a9a9;">
-        <img src="pics/meeting-1002800_1280.jpg" class="card-img-top" alt="..." style="height: 263px; width: 286px;">
-        <div class="card-body">
-          <h5 class="card-title" style="color: #302f40;">Meet and Greet</h5>
-          <p class="card-text" style="color: #302f40;">We are thrilled to announce an exclusive meet and greet event featuring our esteemed influencer and collaborator! This is a unique opportunity for our community to connect with the creative minds behind our latest projects.</p>
-          <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card" style="width: 18rem;background-color: #f4bbd3;">
-        <img src="pics/find influ.png" class="card-img-top" alt="..."style="height: 285px; width: 287px;">
-        <div class="card-body">
-          <h5 class="card-title" style="color:#302f40;">Find Influencer</h5>
-          <p class="card-text" style="color: #302f40;">In today's digital age, influencers hold significant sway over consumer decisions. Finding the right influencer to partner with can amplify your brand's voice, extend your reach, and boost engagement.</p>
-          <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go somewhere</a>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card" style="width: 18rem; background-color: #ffc8fb;">
-        <img src="pics/promotions.png" class="card-img-top" alt="..."style="height: 263px; width: 286px;">
-        <div class="card-body">
-          <h5 class="card-title" style="color:#302f40;">Promotions</h5>
-          <p class="card-text" style="color: #302f40;">In today’s digital age, influencer marketing has become a cornerstone for successful brand promotion. By collaborating with influencers, brands can tap into new audiences, build trust, and drive engagement </p>
-          <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go somewhere</a>
-        </div>
-      </div>
-    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
-</div>
-<!--*********************************************************************-->
-<center>
-  <h2 id="team" style="color: #302f40; background-color:#93e1d8; margin-top: 10px;">Our Team </h2>
-</center>
-<div class="container text-center">
-  <div class="row">
-    <div class="col">
-      <div class="card mb-3" style="max-width: 540px; background-color:#dcccff; ">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="pics/rajesh sir.png" class="img-fluid rounded-start" alt="..." style="border-radius: 10px;">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title" style="color: #302f40;">Under the Guidance</h5>
-              <p class="card-text" style="color: #302f40;">Rajesh Bansal
-                <br>
-                Author of Real Java
-              </p>
-             
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card mb-3" style="max-width: 540px; background-color: #ffcae9;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="pics/myself2.jpg " class="img-fluid rounded-start" alt="..." style="width: 180px; height: 180px;">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body">
-              <h5 class="card-title" style="color: #302f40;">Developed By</h5>
-              <p class="card-text" style="color: #302f40;">Lovish Bansal</p>
-          
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--****************************************************************-->
+  <!--********************************************************-->
   <center>
-    <h2 id="reach" style="background-color: #c850c8; color: #302f40; margin-top: 10px;">Reach Us</h2>
+    <h2 id="services" style="color: #302f40; background-color:#cce8cc; margin-top: 10px;">Our Services </h2>
   </center>
-  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.662273018696!2d75.53326897540065!3d31.395874574271215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a51d30c180edf%3A0x5b7633718d17ef33!2sDr%20B%20R%20Ambedkar%20National%20Institute%20of%20Technology%20Jalandhar!5e0!3m2!1sen!2sin!4v1721060576586!5m2!1sen!2sin" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  <div class="container text-center">
+
+    <div class="row">
+      <div class="col">
+        <div class="card" style="width: 18rem; background-color: #e396df;">
+          <img src="pics/collaborations.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #302f40;">Collaborations</h5>
+            <p class="card-text" style="color: #302f40;">
+              Our collaborations with influencers are more than just partnerships; they are a fusion of creativity,
+              passion, and innovation. By teaming up with top influencers, we bring our brand's story to life in the
+              most engaging and relatable ways.</p>
+            <a href="#" class="btn btn-primary" style="background-color:whitesmoke;color:#c850c8;border: #c850c8;">Go
+              somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;background-color: #e5a9a9;">
+          <img src="pics/meeting-1002800_1280.jpg" class="card-img-top" alt="..." style="height: 263px; width: 286px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color: #302f40;">Meet and Greet</h5>
+            <p class="card-text" style="color: #302f40;">We are thrilled to announce an exclusive meet and greet event
+              featuring our esteemed influencer and collaborator! This is a unique opportunity for our community to
+              connect with the creative minds behind our latest projects.</p>
+            <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go
+              somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem;background-color: #f4bbd3;">
+          <img src="pics/find influ.png" class="card-img-top" alt="..." style="height: 285px; width: 287px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color:#302f40;">Find Influencer</h5>
+            <p class="card-text" style="color: #302f40;">In today's digital age, influencers hold significant sway over
+              consumer decisions. Finding the right influencer to partner with can amplify your brand's voice, extend
+              your reach, and boost engagement.</p>
+            <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go
+              somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card" style="width: 18rem; background-color: #ffc8fb;">
+          <img src="pics/promotions.png" class="card-img-top" alt="..." style="height: 263px; width: 286px;">
+          <div class="card-body">
+            <h5 class="card-title" style="color:#302f40;">Promotions</h5>
+            <p class="card-text" style="color: #302f40;">In today’s digital age, influencer marketing has become a
+              cornerstone for successful brand promotion. By collaborating with influencers, brands can tap into new
+              audiences, build trust, and drive engagement </p>
+            <a href="#" class="btn btn-primary" style="background-color: whitesmoke;color:#c850c8;border: #c850c8;">Go
+              somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--*********************************************************************-->
   <center>
-    <h2 style="color:#302f40;background-color: #c850c8; margin-top: 10px;">Copyright@copyright</h2>
+    <h2 id="team" style="color: #302f40; background-color:#93e1d8; margin-top: 10px;">Our Team </h2>
   </center>
-  <!-- Modal -->
-  <div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="background-color:#ceafff">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;">Login</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-          <div class="form-floating mb-3">
-            <input name="txtEmaill" type="email" class="form-control" id="txtEmaill" placeholder="name@example.com">
-            <label for="floatingInput" style="color: black;">Email address</label>
+  <div class="container text-center">
+    <div class="row">
+      <div class="col">
+        <div class="card mb-3" style="max-width: 540px; background-color:#dcccff; ">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="pics/rajesh sir.png" class="img-fluid rounded-start" alt="..." style="border-radius: 10px;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="color: #302f40;">Under the Guidance</h5>
+                <p class="card-text" style="color: #302f40;">Rajesh Bansal
+                  <br>
+                  Author of Real Java
+                </p>
+
+              </div>
+            </div>
           </div>
-          <div class="form-floating">
-            <input type="password" name="txtPass" class="form-control" id="txtPass" placeholder="Password">
-            <label for="floatingPassword" style="color: black;">Password</label>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#btn-forgot" style="margin-top: 30px;" id="btn-frgt" >
-              Forgot Password
-            </button>
-            
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-3" style="max-width: 540px; background-color: #ffcae9;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img src="pics/myself2.jpg " class="img-fluid rounded-start" alt="..."
+                style="width: 180px; height: 180px;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title" style="color: #302f40;">Developed By</h5>
+                <p class="card-text" style="color: #302f40;">Lovish Bansal</p>
+
+              </div>
+            </div>
           </div>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button name="btn-close" id="btn-close" type="button" class="btn btn-secondary"
-            data-bs-dismiss="modal" style="background-color: #302f40;color:#c850c8; border: #302f40;">Close</button>
-          <button type="button" name="btn-login" id="btn-login" class="btn btn-primary" style="background-color: #302f40;color:#c850c8; border: #302f40;">Login</button>
-        </div>
-        
-      </div>
-    </div>
-  </div>
-  <!-- Modal -->
-  <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" >
-      <div class="modal-content" style="background-color:#b9eee1">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Please fill your details</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <p>
-          <form>
-
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label" style="color: black;">Email address</label>
-              <input name="txtEmail" type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp">
-              <div id="emailHelp" class="form-text" style="color: black;">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label" style="color: black;">Password</label>
-              <input type="password" name="txtPwd" class="form-control" id="txtPwd">
-            </div>
-            <select class="form-select" name="select" id="select" aria-label="Default select example">
-              <option selected style="color: black;">Select the following option</option>
-              <option value="Influencer" style="color: black;">Influencer</option>
-              <option value="Client" style="color: black;">Client</option>
-            </select>
-
-
-          </form>
-          </p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary" name="btn-signup" id="btn-signup" style="background-color: #302f40;color:#c850c8; border: #302f40;">Sign Up</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #302f40;color:#c850c8; border: #302f40;">Close</button>
-
         </div>
       </div>
     </div>
-  </div>
-  <div class="modal fade" id="btn-forgot" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content" style="background-color: #d583d5;">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;">Forgot Password</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label" style="color: black;">Email address</label>
-              <input type="email" class="form-control" id="mail" name="mail" aria-describedby="emailHelp">
-            
+    <!--****************************************************************-->
+    <center>
+      <h2 id="reach" style="background-color: #c850c8; color: #302f40; margin-top: 10px;">Reach Us</h2>
+    </center>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3405.662273018696!2d75.53326897540065!3d31.395874574271215!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391a51d30c180edf%3A0x5b7633718d17ef33!2sDr%20B%20R%20Ambedkar%20National%20Institute%20of%20Technology%20Jalandhar!5e0!3m2!1sen!2sin!4v1721060576586!5m2!1sen!2sin"
+      width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <center>
+      <h2 style="color:#302f40;background-color: #c850c8; margin-top: 10px;">Copyright@copyright</h2>
+    </center>
+    <!-- Modal -->
+    <div class="modal fade" id="modalLogin" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#ceafff">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;">Login</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+            <div class="form-floating mb-3">
+              <input name="txtEmaill" type="email" class="form-control" id="txtEmaill" placeholder="name@example.com">
+              <label for="floatingInput" style="color: black;">Email address</label>
             </div>
+            <div class="form-floating">
+              <input type="password" name="txtPass" class="form-control" id="txtPass" placeholder="Password">
+              <label for="floatingPassword" style="color: black;">Password</label>
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#btn-forgot"
+                style="margin-top: 30px;" id="btn-frgt">
+                Forgot Password
+              </button>
 
-            <button type="button" class="btn btn-primary" id="btn-submit" name="btn-submit" style="background-color: #302f40; color:#c850c8;border: #302f40;">Submit</button>
-          </form>
+            </div>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button name="btn-close" id="btn-close" type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+              style="background-color: #302f40;color:#c850c8; border: #302f40;">Close</button>
+            <button type="button" name="btn-login" id="btn-login" class="btn btn-primary"
+              style="background-color: #302f40;color:#c850c8; border: #302f40;">Login</button>
+          </div>
+
         </div>
-        
       </div>
     </div>
-  </div>
+    <!-- Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background-color:#b9eee1">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel" style="color: black;">Please fill your details</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>
+            <form>
+
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label" style="color: black;">Email address</label>
+                <input name="txtEmail" type="email" class="form-control" id="txtEmail" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text" style="color: black;">We'll never share your email with anyone
+                  else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label" style="color: black;">Password</label>
+                <input type="password" name="txtPwd" class="form-control" id="txtPwd">
+              </div>
+              <select class="form-select" name="select" id="select" aria-label="Default select example">
+                <option selected style="color: black;">Select the following option</option>
+                <option value="Influencer" style="color: black;">Influencer</option>
+                <option value="Client" style="color: black;">Client</option>
+              </select>
 
 
-     
+            </form>
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" name="btn-signup" id="btn-signup"
+              style="background-color: #302f40;color:#c850c8; border: #302f40;">Sign Up</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+              style="background-color: #302f40;color:#c850c8; border: #302f40;">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="btn-forgot" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+      aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="background-color: #d583d5;">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel" style="color: black;">Forgot Password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label" style="color: black;">Email address</label>
+                <input type="email" class="form-control" id="mail" name="mail" aria-describedby="emailHelp">
+
+              </div>
+
+              <button type="button" class="btn btn-primary" id="btn-submit" name="btn-submit"
+                style="background-color: #302f40; color:#c850c8;border: #302f40;">Submit</button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
 
 </body>
 
